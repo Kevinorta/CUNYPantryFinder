@@ -15,7 +15,8 @@ function SchoolInfo({}) {
                     </a><br/>
                     [Growing evidence shows that food insecure students tend to have lower GPAs,
                     face difficulty studying, and have an increased likelihood of withdrawing from
-                    courses or suspending studies.]<a href="#2">
+                    courses or suspending studies.]
+                    <a href="#2">
                         <sup>(2)</sup>
                     </a>
                 </p>
@@ -32,6 +33,20 @@ function SchoolInfo({}) {
                     businesses, and social movements to tackle poverty, racism, and inequality, the
                     drivers of food inequities through conducting research, policy analysis,
                     advocacy and education.</p>
+                <div className="additionalInfo">
+                    <p>[In recent years, rates of attendance in 2-year institutions have soared with
+                        43% of American undergraduates beginning their educational trajectory at a
+                        community college.] <a href="#3">
+                        <sup>(3)</sup>
+                    </a></p>
+                    <p>Yet, 22.6% of U.S. undergraduate students report food
+                        insecurity—approximately 3.9 million students. This is more than double the food
+                        insecurity rate among all U.S. households at 10.5%.
+                        <sup>1029 - 20 National Center for Education Statistics</sup>
+                        <a href="#4">
+                        (4)
+                    </a></p>
+                </div>
                 <div className="sources">
                     <ol>
                         <li id="1">
