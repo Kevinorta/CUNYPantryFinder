@@ -26,6 +26,7 @@ function calculateDistance(lat1, lng1, lat2, lng2) {
     return d;
 }
 
+
 function NavBar({onFiltersChange, onPurposeChange}) {
 
     const [isDropdownVisible,
@@ -152,24 +153,54 @@ function NavBar({onFiltersChange, onPurposeChange}) {
         });
         onFiltersChange(filters)
     };
+  
+    const [checkedCunyWide,
+      setCheckedCunyWide] = React.useState(false);
 
-    const Checkbox = ({label, value, onChange}) => {
-        return (
-            <label>
-                <input type="checkbox" checked={value} onChange={onChange}/> {label}
-            </label>
-        );
-    };
+  const [checkedWalkIn,
+      setCheckedWalkIn] = React.useState(false);
+  const [filters,
+      setFilters] = React.useState({CunyWide: false, WalkIn: false});
+  onFiltersChange(filters)
 
+  const handleChangeCunyWide = () => {
+      setCheckedCunyWide(!checkedCunyWide);
+      setFilters({
+          CunyWide: !checkedCunyWide,
+          WalkIn: checkedWalkIn
+      });
+      onFiltersChange(filters)
+  };
+  
+  const handleChangeWalkIn = () => {
+      setCheckedWalkIn(!checkedWalkIn);
+      setFilters({
+          CunyWide: checkedCunyWide,
+          WalkIn: !checkedWalkIn
+      });
+      onFiltersChange(filters)
+  };
+
+
+  const Checkbox = ({label, value, onChange}) => {
+      return (
+          <label>
+              <input type="checkbox" checked={value} onChange={onChange}/> {label}
+          </label>
+      );
+  };
+  
+  
     return (
-        <nav className="navBar">
-            <div className="nav-text" onClick={() => onPurposeChange(false)}>CUNY Pantry Finder
-            </div>
-            <div className="navBar-link">
-                <a className="nav-icon" onClick={() => onPurposeChange(true)}>
+      <nav className="navBar">
+        <div className="nav-text" onClick={() => onPurposeChange(false)}>CUNY Pantry Finder
+        </div>
+        <div className="navBar-link">
+        <a className="nav-icon" onClick={() => onPurposeChange(true)}>
                     <img src={purposeIcon} alt="Purpose Icon" className="nav-icon"/>
                     Purpose
                 </a>
+
                 <div className="filter-dropdown">
                     <button className="filter-button" onClick={handleDropdownToggle}>
                         <img src={filterIcon} alt="Filter Icon" className="nav-icon"/>
@@ -201,10 +232,11 @@ function NavBar({onFiltersChange, onPurposeChange}) {
                 </div>
             </div>
         </nav>
-    );
-}
 
-function MapComponent({onNearestSchoolsChange, onHoverMarkerChange, activeFilters}) {
+    );
+  }  
+
+  function MapComponent({onNearestSchoolsChange, onHoverMarkerChange, activeFilters}) {
 
     const [position,
         setPosition] = useState(null); // Store user's current location
@@ -269,6 +301,7 @@ function MapComponent({onNearestSchoolsChange, onHoverMarkerChange, activeFilter
     
     // Show the map once the user's position has been retrieved and API loaded
     return (
+
         <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
             <div
                 className="box"
@@ -277,6 +310,7 @@ function MapComponent({onNearestSchoolsChange, onHoverMarkerChange, activeFilter
                 width: "100%"
             }}>
                 {position && (
+
                     <Map defaultZoom={14} defaultCenter={position}>
                         <Marker position={position} onClick={() => setOpen(true)}/> {open && (
                             <InfoWindow position={position} onCloseClick={() => setOpen(false)}>
@@ -343,6 +377,7 @@ function MapComponent({onNearestSchoolsChange, onHoverMarkerChange, activeFilter
 
 // } Web App Components
 function App() {
+
     const [nearestSchools,
         setNearestSchools] = useState([]);
     const [hoveredMarkerName,
@@ -371,16 +406,18 @@ function App() {
     const resultsPerPage = 2;
     const maxPages = Math.ceil(filteredSchools.length / resultsPerPage); // Calculates how many pages of results can be displayed based on resultsPerPage
 
-    return (
-        <div className="App">
-            <header className="App-header">
-                <div className="image-header"></div>
-                <NavBar onFiltersChange={setFilters} onPurposeChange={setPurpose}/>
-                <h1 className="middle-text">Find your nearest CUNY Food Pantry</h1>
-            </header>
-            {!purpose
-                ? (
-                    <div className="container">
+
+  return (
+      <div className="App">
+          <header className="App-header">
+              <div className="image-header"></div>
+              <NavBar onFiltersChange={setFilters} onPurposeChange={setPurpose}/>
+              <h1 className="middle-text">Find your nearest CUNY Food Pantry</h1>
+          </header>
+          {!purpose
+              ? (
+                  <div className="container">
+
 
                         <MapComponent
                             onNearestSchoolsChange={setNearestSchools}
@@ -404,11 +441,11 @@ function App() {
                             </div>
                         </div>
 
-                    </div>
-                )
-                : <div className="container"><Purpose/></div>}
-        </div>
-    );
+                  </div>
+              )
+              : <div className="container"><Purpose/></div>}
+      </div>
+  );
 }
 
 export default App;
