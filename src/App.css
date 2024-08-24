@@ -201,7 +201,7 @@ html {
   max-width: 600px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
-  height: 100%; /* makes the elements take the full height of the container */
+  
   flex: 1; 
 }
 
@@ -221,13 +221,15 @@ html {
 }
 
 
-.InfoSection:hover {
-  background-color: rgba(255, 255, 255, 0.85);
+
+
+.InfoSection:hover, .InfoSection-hover {
+  background-color: rgba(205, 211, 230, 0.85);
   padding: 20px;
   border-radius: 10px;
   margin: 20px auto;
   max-width: 600px;
-  box-shadow: 0 4px 8px rgba(77, 77, 77, 0.6);
+  box-shadow: 0 8px 16px rgba(77, 77, 77, 0.6);
   text-align: left;
 }
 

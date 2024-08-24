@@ -23,80 +23,188 @@ function calculateDistance(lat1, lng1, lat2, lng2) {
     const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const d = R * c; // Distance in kilometers
-
     return d;
 }
 
-function NavBar({ onFiltersChange, onPurposeChange }) {
+function NavBar({onFiltersChange, onPurposeChange}) {
 
-  const [isDropdownVisible, setDropdownVisible] = React.useState(false); // State for dropdown visibility
-  
+    const [isDropdownVisible,
+        setDropdownVisible] = React.useState(false); // State for dropdown visibility
+
     const handleDropdownToggle = () => {
-      setDropdownVisible(!isDropdownVisible); // Toggle dropdown visibility
+        setDropdownVisible(!isDropdownVisible); // Toggle dropdown visibility
     };
     const [checkedCunyWide,
-      setCheckedCunyWide] = React.useState(false);
+        setCheckedCunyWide] = React.useState(false);
+    const [checkedBrooklyn,
+        setCheckedBrooklyn] = React.useState(false);
+    const [checkedQueens,
+        setCheckedQueens] = React.useState(false);
+    const [checkedManhattan,
+        setCheckedManhattan] = React.useState(false);
+    const [checkedBronx,
+        setCheckedBronx] = React.useState(false);
+    const [checkedStatenIsland,
+        setCheckedStatenIsland] = React.useState(false);
+    const [checkedWalkIn,
+        setCheckedWalkIn] = React.useState(false);
+    const [filters,
+        setFilters] = React.useState({
+        CunyWide: false,
+        WalkIn: false,
+        Brooklyn: false,
+        Bronx: false,
+        Manhattan: false,
+        Queens: false,
+        StatenIsland: false
+    });
+    onFiltersChange(filters)
 
-  const [checkedWalkIn,
-      setCheckedWalkIn] = React.useState(false);
-  const [filters,
-      setFilters] = React.useState({CunyWide: false, WalkIn: false});
-  onFiltersChange(filters)
+    const handleChangeCunyWide = () => {
+        setCheckedCunyWide(!checkedCunyWide);
+        setFilters({
+            CunyWide: !checkedCunyWide,
+            WalkIn: checkedWalkIn,
+            Brooklyn: checkedBrooklyn,
+            Bronx: checkedBronx,
+            Manhattan: checkedManhattan,
+            Queens: checkedQueens,
+            StatenIsland: checkedStatenIsland
+        });
+        onFiltersChange(filters)
+    };
 
-  const handleChangeCunyWide = () => {
-      setCheckedCunyWide(!checkedCunyWide);
-      setFilters({
-          CunyWide: !checkedCunyWide,
-          WalkIn: checkedWalkIn
-      });
-      onFiltersChange(filters)
-  };
-  
-  const handleChangeWalkIn = () => {
-      setCheckedWalkIn(!checkedWalkIn);
-      setFilters({
-          CunyWide: checkedCunyWide,
-          WalkIn: !checkedWalkIn
-      });
-      onFiltersChange(filters)
-  };
+    const handleChangeWalkIn = () => {
+        setCheckedWalkIn(!checkedWalkIn);
+        setFilters({
+            CunyWide: checkedCunyWide,
+            WalkIn: !checkedWalkIn,
+            Brooklyn: checkedBrooklyn,
+            Bronx: checkedBronx,
+            Manhattan: checkedManhattan,
+            Queens: checkedQueens,
+            StatenIsland: checkedStatenIsland
+        });
+        onFiltersChange(filters)
+    };
+    const handleChangeBrooklyn = () => {
+        setCheckedBrooklyn(!checkedBrooklyn);
+        setFilters({
+            CunyWide: checkedCunyWide,
+            WalkIn: checkedWalkIn,
+            Brooklyn: !checkedBrooklyn,
+            Bronx: checkedBronx,
+            Manhattan: checkedManhattan,
+            Queens: checkedQueens,
+            StatenIsland: checkedStatenIsland
+        });
+        onFiltersChange(filters)
+    };
+    const handleChangeBronx = () => {
+        setCheckedBronx(!checkedBronx);
+        setFilters({
+            CunyWide: checkedCunyWide,
+            WalkIn: checkedWalkIn,
+            Brooklyn: checkedBrooklyn,
+            Bronx: !checkedBronx,
+            Manhattan: checkedManhattan,
+            Queens: checkedQueens,
+            StatenIsland: checkedStatenIsland
+        });
+        onFiltersChange(filters)
+    };
+    const handleChangeManhattan = () => {
+        setCheckedManhattan(!checkedManhattan);
+        setFilters({
+            CunyWide: checkedCunyWide,
+            WalkIn: checkedWalkIn,
+            Brooklyn: checkedBrooklyn,
+            Bronx: checkedBronx,
+            Manhattan: !checkedManhattan,
+            Queens: checkedQueens,
+            StatenIsland: checkedStatenIsland
+        });
+        onFiltersChange(filters)
+    };
+    const handleChangeQueens = () => {
+        setCheckedQueens(!checkedQueens);
+        setFilters({
+            CunyWide: checkedCunyWide,
+            WalkIn: checkedWalkIn,
+            Brooklyn: checkedBrooklyn,
+            Bronx: checkedBronx,
+            Manhattan: checkedManhattan,
+            Queens: !checkedQueens,
+            StatenIsland: checkedStatenIsland
+        });
+        onFiltersChange(filters)
+    };
+    const handleChangeStatenIsland = () => {
+        setCheckedStatenIsland(!checkedStatenIsland);
+        setFilters({
+            CunyWide: checkedCunyWide,
+            WalkIn: checkedWalkIn,
+            Brooklyn: checkedBrooklyn,
+            Bronx: checkedBronx,
+            Manhattan: checkedManhattan,
+            Queens: checkedQueens,
+            StatenIsland: !checkedStatenIsland
+        });
+        onFiltersChange(filters)
+    };
 
-  const Checkbox = ({label, value, onChange}) => {
-      return (
-          <label>
-              <input type="checkbox" checked={value} onChange={onChange}/> {label}
-          </label>
-      );
-  };
-  
-  
+    const Checkbox = ({label, value, onChange}) => {
+        return (
+            <label>
+                <input type="checkbox" checked={value} onChange={onChange}/> {label}
+            </label>
+        );
+    };
+
     return (
-      <nav className="navBar">
-        <div className="nav-text" onClick={() => onPurposeChange(false)}>CUNY Pantry Finder
-        </div>
-        <div className="navBar-link">
-        <a className="nav-icon" onClick={() => onPurposeChange(true)}>
+        <nav className="navBar">
+            <div className="nav-text" onClick={() => onPurposeChange(false)}>CUNY Pantry Finder
+            </div>
+            <div className="navBar-link">
+                <a className="nav-icon" onClick={() => onPurposeChange(true)}>
                     <img src={purposeIcon} alt="Purpose Icon" className="nav-icon"/>
                     Purpose
                 </a>
-          <div className="filter-dropdown">
-            <button className="filter-button" onClick={handleDropdownToggle}>
-              <img src={filterIcon} alt="Filter Icon" className="nav-icon" />
-              Filter
-            </button>
-            {isDropdownVisible && (
-              <div className="dropdown-content">
-                <Checkbox label="Cunywide" value={checkedCunyWide} onChange={handleChangeCunyWide} />
-                <Checkbox label="Walk-In" value={checkedWalkIn} onChange={handleChangeWalkIn} />
-              </div>
-            )}
-          </div>
-        </div>
-      </nav>
+                <div className="filter-dropdown">
+                    <button className="filter-button" onClick={handleDropdownToggle}>
+                        <img src={filterIcon} alt="Filter Icon" className="nav-icon"/>
+                        Filter
+                    </button>
+                    {isDropdownVisible && (
+                        <div className="dropdown-content">
+                            <Checkbox
+                                label="Cunywide"
+                                value={checkedCunyWide}
+                                onChange={handleChangeCunyWide}/>
+                            <Checkbox label="Walk-In" value={checkedWalkIn} onChange={handleChangeWalkIn}/>
+                            <Checkbox
+                                label="Brooklyn"
+                                value={checkedBrooklyn}
+                                onChange={handleChangeBrooklyn}/>
+                            <Checkbox label="Bronx" value={checkedBronx} onChange={handleChangeBronx}/>
+                            <Checkbox
+                                label="Manhattan"
+                                value={checkedManhattan}
+                                onChange={handleChangeManhattan}/>
+                            <Checkbox label="Queens" value={checkedQueens} onChange={handleChangeQueens}/>
+                            <Checkbox
+                                label="Staten Island"
+                                value={checkedStatenIsland}
+                                onChange={handleChangeStatenIsland}/>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </nav>
     );
-  }  
+}
 
-  function MapComponent({onNearestSchoolsChange, onHoverMarkerChange, activeFilters}) {
+function MapComponent({onNearestSchoolsChange, onHoverMarkerChange, activeFilters}) {
 
     const [position,
         setPosition] = useState(null); // Store user's current location
@@ -109,7 +217,7 @@ function NavBar({ onFiltersChange, onPurposeChange }) {
     const [filters,
         setfilters] = useState(activeFilters);
     useEffect(() => {
-      setfilters(activeFilters);
+        setfilters(activeFilters);
     }, [activeFilters]);
     const setHoveredMarker = (name) => {
         onHoverMarkerChange(name); // Call the prop function to update parent's state
@@ -161,9 +269,14 @@ function NavBar({ onFiltersChange, onPurposeChange }) {
     
     // Show the map once the user's position has been retrieved and API loaded
     return (
-      <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
-        <div className="box" style={{ height: "100vh", width: "100%" }}>
-        {position &&(
+        <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
+            <div
+                className="box"
+                style={{
+                height: "100vh",
+                width: "100%"
+            }}>
+                {position && (
                     <Map defaultZoom={14} defaultCenter={position}>
                         <Marker position={position} onClick={() => setOpen(true)}/> {open && (
                             <InfoWindow position={position} onCloseClick={() => setOpen(false)}>
@@ -175,9 +288,17 @@ function NavBar({ onFiltersChange, onPurposeChange }) {
 
                         {/* Display nearest CUNY schools */}
                         {nearestSchools.filter((school) => {
-                          if (filters.WalkIn && school.appointmentRequired) return false;
-                          if (filters.CunyWide && !school.cunywide ) return false
-                          return true
+                            if (filters.WalkIn && school.appointmentRequired) 
+                                return false;
+                            if (filters.CunyWide && !school.cunywide) 
+                                return false;
+                            return true;
+                        }).filter((school) => {
+                            if (filters.Brooklyn === false && filters.Bronx === false && filters.Manhattan === false && filters.Queens === false && filters.StatenIsland === false) 
+                                return true;
+                            if ((filters.Brooklyn && school.borough === "Brooklyn") || (filters.Bronx && school.borough === "Bronx") || (filters.Manhattan && school.borough === "Manhattan") || (filters.Queens && school.borough === "Queens") || (filters.StatenIsland && school.borough === "Staten Island")) 
+                                return true;
+                            return false;
                         }).map((school, index) => (
                             <Marker key={index} position={{
                                 lat: school.lat,
@@ -222,64 +343,72 @@ function NavBar({ onFiltersChange, onPurposeChange }) {
 
 // } Web App Components
 function App() {
-  const [nearestSchools,
-      setNearestSchools] = useState([]);
-  const [hoveredMarkerName,
-      setHoveredMarkerName] = useState(null);
-  const [resultsPageNum,
-      setresultsPageNum] = useState(0);
-  const [filters,
-      setFilters] = useState({CunyWide: false, WalkIn: false});
-  const [purpose,
-      setPurpose] = useState(false);
-      let filteredSchools = nearestSchools.filter((school) => {
-        if (filters.WalkIn && school.appointmentRequired) return false;
-        if (filters.CunyWide && !school.cunywide ) return false
-        return true
-      })
-      console.log(filteredSchools)
-      
-  const resultsPerPage = 2;
-  const maxPages = Math.ceil(filteredSchools.length / resultsPerPage); // Calculates how many pages of results can be displayed based on resultsPerPage
+    const [nearestSchools,
+        setNearestSchools] = useState([]);
+    const [hoveredMarkerName,
+        setHoveredMarkerName] = useState(null);
+    const [resultsPageNum,
+        setresultsPageNum] = useState(0);
+    const [filters,
+        setFilters] = useState({CunyWide: false, WalkIn: false});
+    const [purpose,
+        setPurpose] = useState(false);
+    let filteredSchools = nearestSchools.filter((school) => {
+        if (filters.WalkIn && school.appointmentRequired) 
+            return false;
+        if (filters.CunyWide && !school.cunywide) 
+            return false;
+        return true;
+    }).filter((school) => {
+        if (filters.Brooklyn === false && filters.Bronx === false && filters.Manhattan === false && filters.Queens === false && filters.StatenIsland === false) 
+            return true;
+        if ((filters.Brooklyn && school.borough === "Brooklyn") || (filters.Bronx && school.borough === "Bronx") || (filters.Manhattan && school.borough === "Manhattan") || (filters.Queens && school.borough === "Queens") || (filters.StatenIsland && school.borough === "Staten Island")) 
+            return true;
+        return false;
+    })
+    console.log(filteredSchools)
 
-  return (
-      <div className="App">
-          <header className="App-header">
-              <div className="image-header"></div>
-              <NavBar onFiltersChange={setFilters} onPurposeChange={setPurpose}/>
-              <h1 className="middle-text">Find your nearest CUNY Food Pantry</h1>
-          </header>
-          {!purpose
-              ? (
-                  <div className="container">
+    const resultsPerPage = 2;
+    const maxPages = Math.ceil(filteredSchools.length / resultsPerPage); // Calculates how many pages of results can be displayed based on resultsPerPage
 
-                      <MapComponent
-                          onNearestSchoolsChange={setNearestSchools}
-                          onHoverMarkerChange={setHoveredMarkerName}
-                          activeFilters={filters}/>
-                      <div className="School-info-section box">
-                          <div>
-                             
+    return (
+        <div className="App">
+            <header className="App-header">
+                <div className="image-header"></div>
+                <NavBar onFiltersChange={setFilters} onPurposeChange={setPurpose}/>
+                <h1 className="middle-text">Find your nearest CUNY Food Pantry</h1>
+            </header>
+            {!purpose
+                ? (
+                    <div className="container">
 
-                              {renderSchoolInfo(filteredSchools.slice(resultsPageNum * resultsPerPage, resultsPageNum * resultsPerPage + resultsPerPage), hoveredMarkerName, filters)}
-                              <div className="pageArrows">
-                                  <button onClick={() => setresultsPageNum(Math.max(resultsPageNum - 1, 0))}>
-                                      <div>&lt;</div>
-                                  </button>
-                                  {resultsPageNum+1}
-                                  <button
-                                      onClick={() => setresultsPageNum(Math.min(resultsPageNum + 1, maxPages - 1))}>
-                                      <div>&gt;</div>
-                                  </button>
-                              </div>
-                          </div>
-                      </div>
+                        <MapComponent
+                            onNearestSchoolsChange={setNearestSchools}
+                            onHoverMarkerChange={setHoveredMarkerName}
+                            activeFilters={filters}/>
+                        <div className="School-info-section box">
+                            <div className="InfoSection-Title">Pantries Within Reach: Your Nearby CUNY Resources</div>
+                            <div>
 
-                  </div>
-              )
-              : <div className="container"><Purpose/></div>}
-      </div>
-  );
+                                {renderSchoolInfo(filteredSchools.slice(resultsPageNum * resultsPerPage, resultsPageNum * resultsPerPage + resultsPerPage), hoveredMarkerName, filters)}
+                                <div className="pageArrows">
+                                    <button onClick={() => setresultsPageNum(Math.max(resultsPageNum - 1, 0))}>
+                                        <div>&lt;</div>
+                                    </button>
+                                    {resultsPageNum + 1}
+                                    <button
+                                        onClick={() => setresultsPageNum(Math.min(resultsPageNum + 1, maxPages - 1))}>
+                                        <div>&gt;</div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                )
+                : <div className="container"><Purpose/></div>}
+        </div>
+    );
 }
 
 export default App;
