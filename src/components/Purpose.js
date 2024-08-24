@@ -1,10 +1,12 @@
 import React from 'react';
+import purposeSurvey from "../assets/purposeSurvey.png";
+import purposeCovid from "../assets/purposeCovid.png";
 
 // import "../App.css"; schoolInfo Component Template
 function SchoolInfo({}) {
     return (
         <div className="pagesContainer box">
-            <div className="InfoSection purpose">
+            <div className="purposeSection">
                 <h1 className="title">How does food insecurity impact students?</h1>
                 {/* TODO: Add sup tags to nums and a tags to reference */}
                 <p>“Food insecure college students are at a greater risk of experiencing lower
@@ -61,6 +63,22 @@ function SchoolInfo({}) {
                                 Unacceptable—Basic Needs Insecurity</a>
                         </li>
                     </ol>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <img
+                            className="statImage"
+                            src={purposeSurvey}
+                            title="Poverty and Academic Problems Among Students reporting Food Insecurity, Healthy CUNY Fall 2018"></img>
+                        <p className="caption">Food insecurity among CUNY students rose from 2018 to 2020</p>
+                    </div>
+                    <div class="column">
+                        <img
+                            className="statImage"
+                            src={purposeCovid}
+                            title="Comparison of rates of Food Insecurity in 2018 and 2020 (After CovId-19)"></img>
+                        <p className="caption">Students from higher-poverty neighborhoods and lower GPAs are more likely to experience academic challenges.</p>
+                    </div>
                 </div>
             </div>
 
