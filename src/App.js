@@ -175,7 +175,7 @@ function MapComponent({ onNearestSchoolsChange, onHoverMarkerChange, filters }) 
     // Show the map once the user's position has been retrieved and API loaded
     return (
       <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
-        <div className="box" style={{ height: "100vh", width: "100%" }}>
+        <div className="box" style={{ height: "1000px", width: "100%" }}>
           {position && (
             <Map defaultZoom={14} defaultCenter={position}>
               <Marker position={position} onClick={() => setOpen(true)} />
@@ -240,7 +240,7 @@ function App() {
             <header className="App-header">
                 <div className="image-header"></div>
                 <NavBar onFiltersChange={setFilters}/>
-                <h1 className="middle-text">Find your nearest CUNY Food Pantry</h1>
+                <h1 className="middle-text">Discover Your Nearest CUNY Pantry</h1>
             </header>
 
             <div className="container">
@@ -248,9 +248,11 @@ function App() {
                 <MapComponent
                     onNearestSchoolsChange={setNearestSchools}
                     onHoverMarkerChange={setHoveredMarkerIndex}
-                    filters={filters}/>
+                    filters={filters}
+                />
 
                 <div className="School-info-section box">
+                <div className="InfoSection-Title">Pantries Within Reach: Your Nearby CUNY Resources</div>
                     {/* TODO: Filter  */}
                     {renderSchoolInfo(nearestSchools.slice(resultsPageNum * resultsPerPage, resultsPageNum * resultsPerPage + resultsPerPage), hoveredMarkerIndex, filters)}
                     <div className="pageArrows">
