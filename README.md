@@ -1,7 +1,5 @@
 # CUNY Pantry Finder
 
-# CUNY Pantry Finder
-
 ## Background
 
 CUNY’s essential resources provide students essential needs in order to promote a healthy environment for education. 
